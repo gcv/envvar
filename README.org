@@ -17,14 +17,14 @@ Envvar resolves variable sources in the following order (lower numbers have prio
 (require '[envvar.core :as e])
 
 ;; return all environment variables as a map:
-e/@*env*
+@e/*env*
 
 ;; return the value of the PATH environment variable:
-(:path e/@*env*)
+(:path @e/*env*)
 
 ;; augment the environment:
 (e/with-env [:one "hello", :two "world"]
-  ;; e/@*env* will now also contain dynamically-scoped bindings for :one and :two
+  ;; @e/*env* will now also contain dynamically-scoped bindings for :one and :two
 )
 
 ;; load more properties into the environment
