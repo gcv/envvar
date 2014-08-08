@@ -1,30 +1,35 @@
 * envvar
 
-A Clojure library designed to make working with environment variables easier. It is based on (and borrows from [[https://github.com/weavejester/environ][environ]], but is friendlier for using non-checked-in user-specific ~.env~ files (similar to the [[https://github.com/bkeepers/dotenv][Ruby dotenv gem]]), and allows simple augmentation of environment variable values. It does not support ~.lein-env~ integration.
+A Clojure library designed to make working with environment variables easier. It is based on (and borrows from) [[https://github.com/weavejester/environ][environ]], but is friendlier for using non-checked-in user-specific ~.env~ files (similar to the [[https://github.com/bkeepers/dotenv][Ruby dotenv gem]]), and allows simple dynamic augmentation of environment variable values. It does not support ~.lein-env~ integration.
 
 
 ** Usage
 
-Envvar resolves variable sources in the following order:
+Envvar resolves variable sources in the following order (lower numbers have priority, so dynamic overrides have highest priority):
 
-1. Environment variables.
-2. Java system properties.
+1. Dynamic overrides.
+2. Anything in user-loaded Java properties files.
 3. Values in the ~.env~ file in the project (a Java properties file).
-4. Anything in user-loaded Java properties files.
-5. Dynamic overrides.
+4. Java system properties.
+5. Environment variables.
 
 #+BEGIN_SRC clojure
 (require '[envvar.core :as e])
+
 ;; return all environment variables as a map:
 e/@*env*
+
 ;; return the value of the PATH environment variable:
 (:path e/@*env*)
+
 ;; augment the environment:
 (e/with-env [:one "hello", :two "world"]
   ;; e/@*env* will now also contain dynamically-scoped bindings for :one and :two
 )
+
 ;; load more properties into the environment
 (e/assoc-file-variables! "/path/to/properties.file")
+
 ;; reset all loaded properties, including ones from the .env file
 (e/reset-file-variables!)
 #+END_SRC
