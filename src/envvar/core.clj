@@ -35,16 +35,16 @@
 (defn- merged-env []
   (merge system-env system-props @env-file-variables))
 
-(defonce ^:dynamic *env* (atom (merged-env)))
+(defonce ^:dynamic env (atom (merged-env)))
+
+(defmacro with-env [bindings & body]
+  `(binding [envvar.core/env (atom (assoc @envvar.core/env ~@bindings))]
+     ~@body))
 
 (defn reset-file-variables! []
   (reset! env-file-variables {})
-  (reset! *env* (merged-env)))
+  (reset! env (merged-env)))
 
-(defn assoc-file-variables! [filename]
+(defn load-file-variables! [filename]
   (swap! env-file-variables merge (read-env-file-variables filename))
-  (reset! *env* (merged-env)))
-
-(defmacro with-env [bindings & body]
-  `(binding [envvar.core/*env* (atom (assoc @envvar.core/*env* ~@bindings))]
-     ~@body))
+  (reset! env (merged-env)))

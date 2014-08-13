@@ -14,24 +14,24 @@ Envvar resolves variable sources in the following order (lower numbers have prio
 5. Environment variables.
 
 #+BEGIN_SRC clojure
-(require '[envvar.core :as e])
+(require '[envvar.core :as envvar :refer [env with-env]])
 
 ;; return all environment variables as a map:
-@e/*env*
+@env
 
 ;; return the value of the PATH environment variable:
-(:path @e/*env*)
+(:path @env)
 
 ;; augment the environment:
-(e/with-env [:one "hello", :two "world"]
-  ;; @e/*env* will now also contain dynamically-scoped bindings for :one and :two
+(with-env [:one "hello", :two "world"]
+  ;; @env will now also contain dynamically-scoped bindings for :one and :two
 )
 
 ;; load more properties into the environment
-(e/assoc-file-variables! "/path/to/properties.file")
+(envvar/load-file-variables! "/path/to/properties.file")
 
 ;; reset all loaded properties, including ones from the .env file
-(e/reset-file-variables!)
+(envvar/reset-file-variables!)
 #+END_SRC
 
 
