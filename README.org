@@ -1,4 +1,4 @@
-* envvar
+* Envvar
 
 A Clojure library designed to make working with environment variables easier. It is based on (and borrows from) [[https://github.com/weavejester/environ][environ]], but is friendlier for using non-checked-in user-specific ~.env~ files (similar to the [[https://github.com/bkeepers/dotenv][Ruby dotenv gem]]), and allows simple dynamic augmentation of environment variable values. It does not support ~.lein-env~ integration.
 
