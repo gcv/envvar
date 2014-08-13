@@ -35,6 +35,24 @@ Envvar resolves variable sources in the following order (lower numbers have prio
 #+END_SRC
 
 
+** Leiningen
+
+#+BEGIN_SRC clojure
+[envvar "1.1.0"]
+#+END_SRC
+
+
+** Maven
+
+#+BEGIN_SRC xml
+<dependency>
+  <groupId>envvar</groupId>
+  <artifactId>envvar</artifactId>
+  <version>1.1.0</version>
+</dependency>
+#+END_SRC
+
+
 ** License
 
 Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
