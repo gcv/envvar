@@ -38,7 +38,7 @@ Envvar resolves variable sources in the following order (lower numbers have prio
 ** Leiningen
 
 #+BEGIN_SRC clojure
-[envvar "1.1.1"]
+[envvar "1.1.2"]
 #+END_SRC
 
 
@@ -48,7 +48,7 @@ Envvar resolves variable sources in the following order (lower numbers have prio
 <dependency>
   <groupId>envvar</groupId>
   <artifactId>envvar</artifactId>
-  <version>1.1.1</version>
+  <version>1.1.2</version>
 </dependency>
 #+END_SRC
 
