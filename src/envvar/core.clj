@@ -3,7 +3,10 @@
             [clojure.java.io :as io])
   (:import  [java.util Properties]))
 
-(defn- keywordize [s]
+;;; NB: This is a public function as of version 1.1.2. Converting from a
+;;; conventional ENVIRONMENT_VARIABLE to a Clojure keywordized
+;;; :environment-variable is a useful part of the envvar interface.
+(defn keywordize [s]
   (-> (str/lower-case s)
       (str/replace "_" "-")
       (str/replace "." "-")
