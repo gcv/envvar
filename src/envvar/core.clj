@@ -7,10 +7,11 @@
 ;;; conventional ENVIRONMENT_VARIABLE to a Clojure keywordized
 ;;; :environment-variable is a useful part of the envvar interface.
 (defn keywordize [s]
-  (-> (str/lower-case s)
-      (str/replace "_" "-")
-      (str/replace "." "-")
-      (keyword)))
+  (when (and (string? s) (not (str/blank? s)))
+    (-> (str/lower-case s)
+        (str/replace "_" "-")
+        (str/replace "." "-")
+        (keyword))))
 
 (defn- read-system-env-variables []
   (->> (System/getenv)
